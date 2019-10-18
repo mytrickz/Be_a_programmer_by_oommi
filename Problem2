@@ -1,0 +1,39 @@
+package main
+
+import (
+	"encoding/csv"
+	"fmt"
+	"os"
+	"sort"
+)
+
+type name struct {
+	firstname string
+	lastname  string
+}
+
+func main() {
+	// Open csv file
+	csvfile, _ := os.Open("NameList.csv")
+	defer csvfile.Close()
+	// Read csv
+	csvRead, _ := csv.NewReader(csvfile).ReadAll()
+
+	// delete column name
+	csvRead = csvRead[1:]
+	// Sort data
+	sort.Slice(csvRead[:], func(i, j int) bool {
+		for x := range csvRead[i] {
+			if csvRead[i][x+1] == csvRead[j][x+1] {
+				continue
+			}
+			return csvRead[i][x+1] < csvRead[j][x+1]
+		}
+		return false
+	})
+
+	for i, _ := range csvRead {
+		fmt.Println(csvRead[i][0], csvRead[i][1])
+	}
+
+}
