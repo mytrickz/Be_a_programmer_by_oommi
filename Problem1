@@ -5,6 +5,10 @@ import (
 )
 
 func main() {
+	sayHi()
+}
+
+func sayHi() {
 	var name string
 	fmt.Print("Enter your name here: ")
 	fmt.Scanln(&name)
