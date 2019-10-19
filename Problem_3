@@ -1,0 +1,32 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	findLottery(123088)
+
+}
+
+func findLottery(lottNo int) {
+	fmt.Printf("Your lottery number is %06d \n", lottNo)
+
+	// Separate last 2 digits
+	lastTwoDigits := lottNo % 100
+
+	// Cleate slice for collect all lottNo
+	lottList := []int{}
+
+	// Run lottery num that win the prize into slice
+	for num := 100; num < 1000000; num++ {
+		if num%100 == 0 {
+			lottList = append(lottList, num+lastTwoDigits)
+		}
+	}
+	fmt.Println("****************All winning prize lottery****************")
+
+	fmt.Printf("%06d", lottList)
+
+}
